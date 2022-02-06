@@ -9,14 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/users/") // RequestMapping base url de requete
 public class userController {
-    @Value("${app.name: Default name}")
-// annotation value retourne la valeur de la clef annocié dans properties seulement dans un enviromnement spring
-    private String appName;
-
-    @GetMapping("/name") // GetMapping reqcupere la base est rajoute un endpoint
-    public String getAppName() {
-        return appName;
-    }
 
     //@RequestMapping(value = "/get",method = RequestMethod.GET) meme chose que la ligne en dessous
     @GetMapping("/get")
