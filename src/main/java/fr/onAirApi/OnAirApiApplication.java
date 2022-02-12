@@ -9,8 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 // @ComponentScan({"fr.onAirApi.controller, fr.onAirApi.service "})  scan seulement les package specifier
 public class OnAirApiApplication {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 		SpringApplication.run(OnAirApiApplication.class, args);
-	}
+    }
 
 }
