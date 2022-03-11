@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/")
 public class GlobalController {
     // annotation value retourne la valeur de la clef annocié dans properties seulement dans un environement spring
     @Value("${app.name: Default name}")

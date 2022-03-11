@@ -1,10 +1,13 @@
 package fr.onAirApi.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UserResponse {
+    // @JsonIgnore si tu ne veux pas renvoyer ce field dans la reponse
     private long id;
-
+    //@JsonProperty("Prenom") si tu veux changer le terme de la clé
     private String firstname;
-
     private String lastname;
 
     public UserResponse(long id, String firstname, String lastname) {

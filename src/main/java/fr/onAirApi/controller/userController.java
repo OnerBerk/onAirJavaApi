@@ -1,19 +1,39 @@
 package fr.onAirApi.controller;
 
-import fr.onAirApi.response.UserResponse;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import fr.onAirApi.domain.OnAirUser;
+import fr.onAirApi.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/users/") // RequestMapping base url de requete
+@RequestMapping("/users") // RequestMapping base url de requete
 public class userController {
+    @Autowired
+    private UserRepository userRepository;
 
     //@RequestMapping(value = "/get",method = RequestMethod.GET) meme chose que la ligne en dessous
-    @GetMapping("/get")
-    public UserResponse getStudent() {
-        UserResponse userResponse = new UserResponse(1, "Öner", "Berk"); // la lib jackson de spring va automatiquement retourner un json
-        return userResponse;
+    @GetMapping("/")
+    public List<OnAirUser> findallUser() {
+        return userRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<OnAirUser> findUserById(@PathVariable(value = "id") long id) {
+        Optional<OnAirUser> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            return ResponseEntity.ok().body(user.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping
+    public OnAirUser saveUser(@Validated @RequestBody OnAirUser user) {
+        return userRepository.save(user);
     }
 }
